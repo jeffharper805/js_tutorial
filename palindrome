@@ -1,0 +1,25 @@
+#!/usr/local/bin/node
+
+let word = "abba";
+let N = word.length;
+let ispalindrome = true;
+
+for (let i = 0; i < N; i++) {
+  if (word[i] !== word[N-i-1]) {
+    ispalindrome = false;
+    i = N;
+  }
+}
+if (ispalindrome){
+  console.log(`"${word}" is a palindrome`);
+} else {
+  console.log(`"${word}" is NOT a palindrome`);
+}
+
+word = "sdfkl asdf";
+let word_reverse = word.split("").reverse().join("");
+if (word === word_reverse) {
+  console.log(`"${word}" is a Palindrome`);
+} else {
+  console.log(`"${word}" is NOT a Palindrome`);
+}
