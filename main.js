@@ -1,10 +1,30 @@
 let Phrase = require("jdharper-palindrome");
 
-let string = prompt("Please enter a string for palindrome testing:");
-let phrase = new Phrase(string);
+function palindromeTester(event) {
+  event.preventDefault();
+  
+  let phrase = new Phrase(event.target.phrase.value);
+  let palindromeResult = document.querySelector("#palindromeResult");
 
-if (phrase.palindrome()) {
-  alert(`"${phrase.content}" is a paliindrome!`);
-} else {
-  alert(`"${phrase.content}" is not a paliindrome.`);
+  if (phrase.palindrome()) {
+    palindromeResult.innerHTML = `"<strong>${phrase.content}</strong>" is a palindrome!`;
+  } else {
+    palindromeResult.innerHTML = `"${phrase.content}" is not a palindrome.`;
+  }
 }
+
+document.addEventListener("DOMContentLoaded", function() {
+  let tester = document.querySelector("#palindromeTester");
+  tester.addEventListener("submit", function(event) {
+    palindromeTester(event);
+  });
+});
+
+/* 
+document.addEventListener("DOMContentLoaded", function() {
+  let form = document.querySelector("#palindromeTester");
+  form.addEventListener("submit", function() {
+    palindromeTester();
+  });
+});
+ */
