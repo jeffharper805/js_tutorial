@@ -1,0 +1,31 @@
+#!/usr/local/bin/node
+
+let urllib = require('urllib');
+let Phrase = require("jdharper-palindrome");
+let url = 'https://cdn.learnenough.com/phrases.txt';
+
+/* 
+urllib.request(url, {followRedirect: true}, function (error, data, response) {
+  let body = data.toString();
+  body.split("\n").forEach( function(line) {
+    let phrase = new Phrase(line);
+    if (phrase.palindrome()) {
+      console.log(`Palindrome detected ${line}`);
+  }
+  });
+});
+ */
+
+
+urllib.request(url, {followRedirect: true}, function (error, data, response) {
+  let body = data.toString();
+  let lines = body.split("\n");
+  let palindromes = lines.filter(line => {
+    let phrase = new Phrase(line);
+    return phrase.palindrome();
+  });
+
+  palindromes.forEach(function(palindrome) {
+    console.log("A palindrome detected:", palindrome);
+  });
+});

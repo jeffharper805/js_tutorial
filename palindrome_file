@@ -1,0 +1,38 @@
+#!/usr/local/bin/node
+
+let fs = require("fs");
+let Phrase = require("jdharper-palindrome");
+
+/* 
+// Asynchronous file reading
+fs.readFile("phrases.txt", "utf8", function(err, contents) {
+  console.log(contents);
+});
+ */
+ 
+/* 
+let text = fs.readFileSync("phrases.txt", "utf-8").split("\n");
+
+for (i=0; i<text.length; i++) {
+  let phrase = new Phrase(text[i]);
+  if (phrase.palindrome()) {
+    console.log(phrase.content);
+  };
+};
+ */
+
+// or - using forEach
+let text = fs.readFileSync("phrases.txt", "utf-8");
+text.split("\n").forEach( function(line) {
+  let phrase = new Phrase(line);
+  if (phrase.palindrome()) {
+    console.log(`Palindrome detected ${line}`);
+    
+    try {
+      let data = fs.writeFileSync("palindromes.txt", `${line}\n`, {flag: "a"});
+      //file written successfully
+    } catch (err) {
+      console.log(err);
+    }
+  }
+});
